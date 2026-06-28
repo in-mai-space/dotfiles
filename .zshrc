@@ -31,9 +31,6 @@ source $ZSH/oh-my-zsh.sh
 export DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
 
 # Navigation shortcuts for jumping between common folders.
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
 alias home='cd ~'
 alias dot='cd ~/dotfiles'
 
@@ -47,13 +44,6 @@ alias cp='cp -iv'
 alias mv='mv -iv'
 alias rm='rm -iv'
 alias mkdir='mkdir -pv'
-
-# Better defaults for directory listings on macOS.
-alias ls='ls -G'
-
-# Network and response debugging helpers.
-alias ip='curl -s https://ifconfig.me'
-alias ips='echo "Local IP: $(ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null || echo unavailable)"; echo "Public IP: $(curl -s --max-time 5 https://ifconfig.me 2>/dev/null || echo unavailable)"'
 
 # Git workflow shortcuts.
 alias pus='git push'
@@ -87,7 +77,6 @@ alias vcfg='nvim "$DOTFILES_DIR/nvim"'
 
 # GitHub pull request shortcuts.
 alias pr="gh pr create --base main --fill"
-alias list-pr="gh pr list"
 
 if command -v go >/dev/null 2>&1; then
     export PATH="$PATH:$(go env GOPATH)/bin"

@@ -13,8 +13,13 @@ if [ -e "$HOME/.zshrc" ] && [ ! -L "$HOME/.zshrc" ]; then
   mv "$HOME/.zshrc" "$HOME/.zshrc.backup.$(date +%Y%m%d%H%M%S)"
 fi
 
+if [ -e "$HOME/.config/zed" ] && [ ! -L "$HOME/.config/zed" ]; then
+  mv "$HOME/.config/zed" "$HOME/.config/zed.backup.$(date +%Y%m%d%H%M%S)"
+fi
+
 ln -sfn "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 ln -sfn "$DOTFILES_DIR/wezterm/.wezterm.lua" "$HOME/.wezterm.lua"
 ln -sfn "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
+ln -sfn "$DOTFILES_DIR/zed" "$HOME/.config/zed"
 
-echo "Linked nvim, wezterm, and zsh configs from $DOTFILES_DIR"
+echo "Linked nvim, wezterm, zsh, and zed configs from $DOTFILES_DIR"
