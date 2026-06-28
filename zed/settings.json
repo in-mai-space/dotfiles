@@ -30,6 +30,10 @@
       "milliseconds": 1000,
     },
   },
+  "auto_install_extensions": {
+    "night-owl": true,
+    "catppuccin": true
+  },
   "agent_servers": {
     "claude-acp": {
       "type": "registry",
