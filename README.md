@@ -1,6 +1,6 @@
 # dotfiles
 
-neovim + wezterm + zsh config
+neovim + wezterm + zsh + zed config
 
 ## Setup
 
