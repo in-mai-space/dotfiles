@@ -56,7 +56,7 @@ echo "Applying macOS defaults..."
 
 echo "Installing node and Claude Code..."
 mise use --global node@lts
-npm install -g @anthropic-ai/claude-code
+mise exec -- npm install -g @anthropic-ai/claude-code
 
 echo "Installing nvim plugins..."
 nvim --headless "+Lazy! sync" +qa
