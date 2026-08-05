@@ -9,18 +9,53 @@ if ! command -v brew >/dev/null 2>&1; then
   exit 1
 fi
 
-echo "Installing packages from Brewfile..."
-BREWFILE_PATH="$DOTFILES_DIR/Brewfile"
-
+SKIP_WEZTERM_CASK=false
 if brew list --cask wezterm@nightly >/dev/null 2>&1; then
-  echo "Detected wezterm@nightly; skipping stable wezterm cask from Brewfile."
-  TMP_BREWFILE="$(mktemp)"
-  trap 'rm -f "$TMP_BREWFILE"' EXIT
-  grep -v '^cask "wezterm"$' "$DOTFILES_DIR/Brewfile" > "$TMP_BREWFILE"
-  BREWFILE_PATH="$TMP_BREWFILE"
+  echo "Detected wezterm@nightly; will skip stable wezterm cask."
+  SKIP_WEZTERM_CASK=true
 fi
 
-brew bundle --file "$BREWFILE_PATH"
+echo "Installing formulae and mas apps..."
+TMP_NO_CASKS="$(mktemp)"
+trap 'rm -f "$TMP_NO_CASKS"' EXIT
+grep -v '^cask ' "$DOTFILES_DIR/Brewfile" > "$TMP_NO_CASKS"
+brew bundle --file "$TMP_NO_CASKS"
+
+install_cask_if_missing() {
+  local cask="$1"
+  if brew list --cask "$cask" >/dev/null 2>&1; then
+    echo "  $cask: already installed via Homebrew, skipping"
+    return
+  fi
+  local app_name
+  app_name=$(brew info --cask --json=v2 "$cask" 2>/dev/null | \
+    python3 -c "
+import sys, json
+try:
+    data = json.load(sys.stdin)
+    for artifact in data['casks'][0].get('artifacts', []):
+        if isinstance(artifact, dict) and 'app' in artifact:
+            print(artifact['app'][0])
+            break
+except:
+    pass
+" 2>/dev/null || echo "")
+  if [ -n "$app_name" ] && { [ -d "/Applications/$app_name" ] || [ -d "$HOME/Applications/$app_name" ]; }; then
+    echo "  $cask: '$app_name' already installed, skipping"
+    return
+  fi
+  echo "  Installing $cask..."
+  brew install --cask "$cask"
+}
+
+echo "Installing casks (skipping already-installed apps)..."
+while IFS= read -r cask; do
+  if [ "$cask" = "wezterm" ] && [ "$SKIP_WEZTERM_CASK" = "true" ]; then
+    echo "  wezterm: skipping (wezterm@nightly is installed)"
+    continue
+  fi
+  install_cask_if_missing "$cask"
+done < <(grep '^cask ' "$DOTFILES_DIR/Brewfile" | sed 's/^cask "\(.*\)"$/\1/')
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   echo "Installing Oh My Zsh..."
