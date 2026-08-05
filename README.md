@@ -7,7 +7,7 @@ bootstrap my digital self
 ```sh
 # 1. Run bootstrap
 cd ~/dotfiles
-just bootstrap
+./scripts/bootstrap.sh
 
 # 2. Authenticate GitHub
 gh auth login
