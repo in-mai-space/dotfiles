@@ -54,13 +54,13 @@ echo "Linking dotfiles..."
 echo "Applying macOS defaults..."
 "$DOTFILES_DIR/scripts/macos.sh"
 
-if command -v node >/dev/null 2>&1; then
-  echo "Installing Claude Code..."
-  npm install -g @anthropic-ai/claude-code
-else
-  echo "Skipping Claude Code — node not found. Install node via mise and run: npm install -g @anthropic-ai/claude-code"
-fi
+echo "Installing node and Claude Code..."
+mise use --global node@lts
+npm install -g @anthropic-ai/claude-code
+
+echo "Installing nvim plugins..."
+nvim --headless "+Lazy! sync" +qa
 
 echo ""
 echo "Bootstrap complete."
-echo "Next steps: run 'nvim' once to install plugins, then run 'exec zsh'."
+echo "Run 'exec zsh' to reload your shell."

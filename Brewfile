@@ -1,4 +1,5 @@
 brew "fd"
+brew "just"
 brew "git"
 brew "gh"
 brew "lazygit"
