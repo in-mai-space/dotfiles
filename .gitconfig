@@ -1,0 +1,22 @@
+[user]
+	name = Mai
+	email = # fill in your git email
+
+[init]
+	defaultBranch = main
+
+[push]
+	autoSetupRemote = true
+
+[pull]
+	rebase = false
+
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore_global
+
+[rerere]
+	enabled = true
+
+[alias]
+	lg = log --oneline --graph --decorate

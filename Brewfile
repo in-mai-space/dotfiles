@@ -1,8 +1,11 @@
 brew "fd"
 brew "git"
+brew "gh"
 brew "lazygit"
+brew "mise"
 brew "neovim"
 brew "ripgrep"
+brew "stow"
 brew "stylua"
 brew "zsh"
 
@@ -15,6 +18,8 @@ cask "visual-studio-code"
 cask "wezterm"
 cask "zed"
 cask "zoom"
+
+cask "font-jetbrains-mono-nerd-font"
 
 brew "mas"
 mas "Bear", id: 1091189122

@@ -28,11 +28,11 @@ source $ZSH/oh-my-zsh.sh
 # -----------------------------
 # Aliases
 # -----------------------------
-export DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
+export DOTFILES_DIR="${DOTFILES_DIR:-$HOME/Documents/dotfiles}"
 
 # Navigation shortcuts for jumping between common folders.
 alias home='cd ~'
-alias dot='cd ~/dotfiles'
+alias dot='cd "$DOTFILES_DIR"'
 
 # Quick system inspection helpers.
 alias psg='ps aux | grep -i'

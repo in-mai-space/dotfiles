@@ -22,13 +22,6 @@ fi
 
 brew bundle --file "$BREWFILE_PATH"
 
-if brew list --cask font-jetbrains-mono >/dev/null 2>&1; then
-  echo "JetBrains Mono is already installed."
-else
-  echo "Installing JetBrains Mono..."
-  brew install --cask font-jetbrains-mono
-fi
-
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   echo "Installing Oh My Zsh..."
   RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -57,5 +50,10 @@ clone_plugin "https://github.com/MichaelAquilina/zsh-you-should-use" "$ZSH_CUSTO
 echo "Linking dotfiles..."
 "$DOTFILES_DIR/scripts/link.sh"
 
+
+echo "Applying macOS defaults..."
+"$DOTFILES_DIR/scripts/macos.sh"
+
+echo ""
 echo "Bootstrap complete."
 echo "Next steps: run 'nvim' once to install plugins, then run 'exec zsh'."
