@@ -6,4 +6,14 @@ brew "ripgrep"
 brew "stylua"
 brew "zsh"
 
+cask "arc"
+cask "figma"
+cask "orbstack"
+cask "slack"
+cask "visual-studio-code"
 cask "wezterm"
+cask "zed"
+cask "zoom"
+
+brew "mas"
+mas "Bear", id: 1091189122
