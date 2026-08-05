@@ -7,6 +7,7 @@ brew "stylua"
 brew "zsh"
 
 cask "arc"
+cask "claude"
 cask "figma"
 cask "orbstack"
 cask "slack"
